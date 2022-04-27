@@ -41,10 +41,8 @@ namespace Cinema_ECommerce.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var actorDetails = await _actorsService.GetByIdAsync(id);
-
             if (actorDetails == null) return View("NotFound");
             return View(actorDetails);
-            
         }
 
         //Get: Actors/Edit

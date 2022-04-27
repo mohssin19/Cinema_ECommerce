@@ -3,5 +3,5 @@ using Cinema_ECommerce.Models;
 
 namespace Cinema_ECommerce.Data.Services
 {
-    public interface IProducersService : IEntityBaseRepository<Producer>{}
+    public interface ICinemasService : IEntityBaseRepository<Cinema>{}
 }
