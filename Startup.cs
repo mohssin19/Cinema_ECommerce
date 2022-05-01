@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cinema_ECommerce.Data;
+using Cinema_ECommerce.Data.Cart;
 using Cinema_ECommerce.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +36,11 @@ namespace Cinema_ECommerce
             services.AddScoped<IProducersService, ProducersService>();
             services.AddScoped<ICinemasService, CinemasService>();
             services.AddScoped<IMoviesService, MoviesService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+            services.AddScoped<IOrdersService, OrdersService>();
+
+            services.AddSession();
 
             services.AddControllersWithViews();
         }
@@ -55,6 +62,8 @@ namespace Cinema_ECommerce
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 
